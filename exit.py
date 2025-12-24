@@ -60,8 +60,7 @@ def friend_path():
         choice = input("> ").strip().lower()
         if choice == "stay":
             clear()
-            print("You chose to stay.")
-            print("The game ends here.")
+            print("Game terminated.")
             input("\nPress ENTER to exit.")
             return
         else:
