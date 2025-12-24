@@ -1,4 +1,5 @@
 import os
+import sys
 
 def clear():
     os.system("clear")
@@ -17,7 +18,51 @@ def first_room():
 
     while True:
         choice = input("> ").strip().lower()
+
         if choice == "move the barrel":
+            return "barrel"
+
+        elif choice == "sit down next to my friend":
+            friend_path()
+            sys.exit()  # Exit game after staying
+
+        else:
+            print("That doesn't work.")
+
+def friend_path():
+    clear()
+    print("Your friend hands you a note.")
+    print("What do you do?\n")
+
+    while True:
+        choice = input("> ").strip().lower()
+        if choice == "read note":
+            break
+        else:
+            print("That doesn't work.")
+
+    clear()
+    print("The room is too dark.")
+    print("What do you do?\n")
+
+    while True:
+        choice = input("> ").strip().lower()
+        if choice == "light a match":
+            break
+        else:
+            print("That doesn't work.")
+
+    clear()
+    print('The note says, "Don\'t leave me here."')
+    print("Do you leave your friend or stay?\n")
+
+    while True:
+        choice = input("> ").strip().lower()
+        if choice == "stay":
+            clear()
+            print("You chose to stay.")
+            print("The game ends here.")
+            input("\nPress ENTER to exit.")
             return
         else:
             print("That doesn't work.")
@@ -97,12 +142,14 @@ def ending():
 def main():
     while True:
         title_screen()
-        first_room()
-        second_room()
-        third_room()
-        if not ending():
-            clear()
-            break
+        path = first_room()
+
+        if path == "barrel":
+            second_room()
+            third_room()
+            if not ending():
+                clear()
+                break
 
 if __name__ == "__main__":
     main()
