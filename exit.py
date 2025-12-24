@@ -1,10 +1,17 @@
 import os
 import sys
+import time
 
 # ---------- Terminal Helpers ----------
 
 def clear():
     os.system("clear")
+
+def slow_print(text, delay=0.035):
+    for char in text:
+        print(char, end="", flush=True)
+        time.sleep(delay)
+    print()
 
 def normalize(text):
     fillers = {"the", "a", "an", "my", "to", "on"}
@@ -13,9 +20,6 @@ def normalize(text):
     return " ".join(filtered)
 
 def wait_for_command(valid_commands):
-    """
-    valid_commands: set of normalized command strings
-    """
     while True:
         user_input = input("> ").strip()
         normalized = normalize(user_input)
@@ -23,48 +27,48 @@ def wait_for_command(valid_commands):
         if normalized in valid_commands:
             return normalized
         else:
-            print("That doesn't work.")
+            slow_print("That doesn't work.", 0.02)
 
 # ---------- Game Screens ----------
 
 def title_screen():
     clear()
-    print("eXit\n")
-    print("Press ENTER to begin")
+    slow_print("eXit\n", 0.08)
+    slow_print("Press ENTER to begin", 0.03)
     input()
 
 # ---------- Paths ----------
 
 def friend_path():
     clear()
-    print("Your friend hands you a note.")
-    print("What do you do?\n")
+    slow_print("Your friend hands you a note.")
+    slow_print("What do you do?\n")
 
     wait_for_command({"read note"})
 
     clear()
-    print("The room is too dark.")
-    print("What do you do?\n")
+    slow_print("The room is too dark.")
+    slow_print("What do you do?\n")
 
     wait_for_command({"light match"})
 
     clear()
-    print('The note says, "Don\'t leave me here."')
-    print("Do you leave your friend or stay?\n")
+    slow_print('The note says, "Don\'t leave me here."')
+    slow_print("Do you leave your friend or stay?\n")
 
     wait_for_command({"stay"})
 
     clear()
-    print("You chose to stay.")
-    print("The game ends here.")
+    slow_print("You chose to stay.")
+    slow_print("The game ends here.")
     input("\nPress ENTER to exit.")
     sys.exit()
 
 def first_room():
     clear()
-    print("You're trapped in a dungeon with your friend.")
-    print("You see a barrel.")
-    print("What do you do?\n")
+    slow_print("You're trapped in a dungeon with your friend.")
+    slow_print("You see a barrel.")
+    slow_print("What do you do?\n")
 
     action = wait_for_command({
         "move barrel",
@@ -75,41 +79,41 @@ def first_room():
 
 def second_room():
     clear()
-    print("The barrel rolls aside and you find a secret tunnel.")
-    print("What do you do?\n")
+    slow_print("The barrel rolls aside and you find a secret tunnel.")
+    slow_print("What do you do?\n")
 
     wait_for_command({"enter tunnel"})
 
 def third_room():
     clear()
-    print("You start to escape but your friend is too weak to go with you.")
-    print("They hand you a note.")
-    print("What do you do?\n")
+    slow_print("You start to escape but your friend is too weak to go with you.")
+    slow_print("They hand you a note.")
+    slow_print("What do you do?\n")
 
     wait_for_command({"read note"})
 
     clear()
-    print("It is too dark to read the note.")
-    print("What do you do?\n")
+    slow_print("It is too dark to read the note.")
+    slow_print("What do you do?\n")
 
     wait_for_command({"leave"})
 
     clear()
-    print("You crawl through the tunnel and the tunnel leads you to a beach.")
-    print("What do you do?\n")
+    slow_print("You crawl through the tunnel and the tunnel leads you to a beach.")
+    slow_print("What do you do?\n")
 
     wait_for_command({"look"})
 
     clear()
-    print("In the water, you see a boat.")
-    print("What do you do?\n")
+    slow_print("In the water, you see a boat.")
+    slow_print("What do you do?\n")
 
     wait_for_command({"get boat", "get on boat"})
 
 def ending():
     clear()
-    print("Congratulations, you're heading to a new world!")
-    print("Do you want to play again? (Y/N)\n")
+    slow_print("Congratulations, you're heading to a new world!")
+    slow_print("Do you want to play again? (Y/N)\n")
 
     while True:
         choice = input("> ").strip().lower()
@@ -118,7 +122,7 @@ def ending():
         elif choice == "n":
             return False
         else:
-            print("Please enter Y or N.")
+            slow_print("Please enter Y or N.", 0.02)
 
 # ---------- Main Loop ----------
 
