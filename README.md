@@ -24,6 +24,12 @@ If you are operating in Windows:
 python exit.py
 ```
 
+At any point during the game, if you would like to quit, use:
+- q
+- q()
+- quit
+- exit
+
 ## Disclaimer
 
 This repository has no affiliation with the Mr. Robot brand. 
