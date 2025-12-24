@@ -2,8 +2,16 @@
 don't leave me here.
 
 ## Requirements
+
+### Software
+
+Python 3.8 or greater
+
+### Packages
+
 - os
 - sys
+
 
 ## Usage
 
