@@ -13,11 +13,18 @@ def normalize(text):
     filtered = [w for w in words if w not in fillers]
     return " ".join(filtered)
 
+def check_quit(raw_input):
+    quit_commands = {"q", "q()", "exit", "quit"}
+    if raw_input.lower().strip() in quit_commands:
+        clear()
+        sys.exit()
+
 def wait_for_command(valid_commands):
     while True:
         user_input = input("> ").strip()
-        normalized = normalize(user_input)
+        check_quit(user_input)
 
+        normalized = normalize(user_input)
         if normalized in valid_commands:
             return normalized
         else:
@@ -105,5 +112,37 @@ def third_room():
 
 def ending():
     clear()
-    print("Congratulations, you're heading to a new wo
+    print("Congratulations, you're heading to a new world!")
+    print("Do you want to play again? (Y/N)\n")
+
+    while True:
+        choice = input("> ").strip().lower()
+        check_quit(choice)
+
+        if choice == "y":
+            return True
+        elif choice == "n":
+            return False
+        else:
+            print("Please enter Y or N.")
+
+# ---------- Main Loop ----------
+
+def main():
+    while True:
+        title_screen()
+        path = first_room()
+
+        if path == "sit down next friend":
+            friend_path()
+
+        elif path == "move barrel":
+            second_room()
+            third_room()
+            if not ending():
+                clear()
+                break
+
+if __name__ == "__main__":
+    main()
 
