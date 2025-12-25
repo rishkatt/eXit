@@ -35,11 +35,6 @@ To install imgcat, run this command in your Linux terminal:
 sudo snap install imgcat
 ```
 
-Or if running on MacOS / Linux with Homebrew:
-```
-brew install imgcat
-```
-
 ## Usage
 
 If you are operating in Linux, run this in your terminal:
@@ -61,4 +56,5 @@ At any point during the game, if you would like to quit, run:
 ## Disclaimer
 
 This repository has no affiliation with the Mr. Robot brand. 
+
 
