@@ -1,5 +1,6 @@
 # eXit
-don't leave me here.
+
+![img0](images/eXit.png)
 
 ## Requirements
 
