@@ -37,7 +37,7 @@ sudo snap install imgcat
 
 Or if running on MacOS / Linux with Homebrew:
 ```
-brew install imgcat
+brew install danielgatis/imgcat/imgcat
 ```
 
 ## Usage
