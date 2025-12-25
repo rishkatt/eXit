@@ -4,6 +4,11 @@ import sys
 import time
 import platform
 
+# Import if running in Windows
+if platform.system() == "Windows":
+    from PIL import Image
+    import ascii_magic
+
 # ---------- Terminal Helpers ----------
 
 def clear():
