@@ -18,12 +18,12 @@
 
 If you are operating in Linux:
 ```
-python3 exit.py
+python3 eXit.py
 ```
 
 If you are operating in Windows:
 ```
-python exit.py
+python eXit.py
 ```
 
 At any point during the game, if you would like to quit, use:
