@@ -16,8 +16,8 @@
 - platform
 - ascii_magic (Windows)
 - imgcat (WSL + Linux)
-
-##### ascii_magic
+---
+#### `ascii_magic`
 
 For ascii_magic, run this command in Windows:
 ```
@@ -47,7 +47,7 @@ source .venv/bin/activate
 You should see:
 
 ```
-(.venv)
+(.venv) $...
 ```
 
 before your terminal username.
@@ -57,7 +57,7 @@ We can then install pillow and ascii_magic with running:
 pip install pillow ascii_magic
 ```
 
-##### imgcat
+#### `imgcat`
 
 To install imgcat, run this command:
 ```
@@ -81,12 +81,13 @@ If you are operating in Windows:
 python eXit.py
 ```
 
-At any point during the game, if you would like to quit, use:
-- q
-- q()
-- quit
-- exit
+At any point during the game, if you would like to quit, run:
+- `q`
+- `q()`
+- `quit`
+- `exit`
 
 ## Disclaimer
 
 This repository has no affiliation with the Mr. Robot brand. 
+
