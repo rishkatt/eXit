@@ -2,11 +2,17 @@
 import os
 import sys
 import time
+import platform
 
 # ---------- Terminal Helpers ----------
 
 def clear():
-    os.system("clear")
+    if platform.system() == "Linux":
+        os.system('clear')
+    elif platform.system() == "Windows":
+        os.system('cls')
+    else:
+        print("\n" * 100)
 
 def normalize(text):
     fillers = {"the", "a", "an", "my", "to", "on"}
