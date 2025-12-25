@@ -79,48 +79,6 @@ def wait_for_command(valid_commands, invalid_handlers=None):
 
         print("That doesn't work.")
 
-# ---------- ASCII ART ----------
-
-TITLE_ART = r"""
- ███████╗██╗  ██╗██╗████████╗
- ██╔════╝╚██╗██╔╝██║╚══██╔══╝
- █████╗   ╚███╔╝ ██║   ██║
- ██╔══╝   ██╔██╗ ██║   ██║
- ███████╗██╔╝ ██╗██║   ██║
- ╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝
-"""
-
-DUNGEON_ART = r"""
-  ███████████████
-  █             █
-  █   FRIEND    █
-  █     []      █
-  █   BARREL    █
-  █             █
-  ███████████████
-"""
-
-TUNNEL_ART = r"""
-   #########
-  #         #
- #  TUNNEL   #
-  #         #
-   #########
-"""
-
-BEACH_ART = r"""
- ~ ~ ~ ~ ~ ~ ~
-     🌴
- ~ ~ ~ ~ ~ ~ ~
-"""
-
-BOAT_ART = r"""
-      __/___
- _____/______|
- \              \
-  \______________\
-"""
-
 # ---------- Screens ----------
 
 def title_screen():
@@ -131,15 +89,15 @@ def title_screen():
 
 def too_dark():
     clear()
-    print(DUNGEON_ART)
-    print("The room is too dark.")
+    show_image("images/fourth_room_a.png")
+    print("It is too dark to read the note.")
     print("What do you do?\n")
 
 # ---------- Paths ----------
 
 def friend_path():
     clear()
-    print(DUNGEON_ART)
+    show_image("images/second_room_b.png")
     print("Your friend hands you a note.")
     print("What do you do?\n")
 
@@ -149,7 +107,7 @@ def friend_path():
     )
 
     clear()
-    print(DUNGEON_ART)
+    show_image("images/third_room_b.png")
     print('The note says, "Don\'t leave me here."')
     print("Do you leave your friend or stay?\n")
 
@@ -162,7 +120,7 @@ def friend_path():
 
 def first_room():
     clear()
-    print(DUNGEON_ART)
+    show_image("images/first_room.png")
     print("You're trapped in a dungeon with your friend.")
     print("You see a barrel.")
     print("What do you do?\n")
@@ -174,7 +132,7 @@ def first_room():
 
 def second_room():
     clear()
-    print(TUNNEL_ART)
+    show_image("images/second_room_a.png")
     print("The barrel rolls aside and you find a secret tunnel.")
     print("What do you do?\n")
 
@@ -182,7 +140,7 @@ def second_room():
 
 def third_room():
     clear()
-    print(TUNNEL_ART)
+    show_image("images/third_room_a.png")
     print("You start to escape but your friend is too weak to go with you.")
     print("They hand you a note.")
     print("What do you do?\n")
@@ -193,14 +151,14 @@ def third_room():
     )
 
     clear()
-    print(BEACH_ART)
+    show_image("images/fifth_room_a.png")
     print("You crawl through the tunnel and the tunnel leads you to a beach.")
     print("What do you do?\n")
 
     wait_for_command({"look"})
 
     clear()
-    print(BOAT_ART)
+    show_image("images/sixth_room_a.png")
     print("In the water, you see a boat.")
     print("What do you do?\n")
 
@@ -208,7 +166,7 @@ def third_room():
 
 def ending():
     clear()
-    print(BOAT_ART)
+    show_image("images/final_room_a.png")
     print("Congratulations, you're heading to a new world!")
     print("Do you want to play again? (Y/N)\n")
 
