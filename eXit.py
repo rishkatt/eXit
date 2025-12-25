@@ -22,27 +22,33 @@ def clear():
 def show_image(path):
     system = platform.system()
 
+    # Resolve absolute path safely
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    image_path = os.path.join(base_dir, path)
+
     # ---------- Linux: try imgcat ----------
     if system == "Linux":
         if os.system("command -v imgcat >/dev/null 2>&1") == 0:
-            os.system(f"imgcat {path}")
+            os.system(f"imgcat '{image_path}'")
             return
 
     # ---------- Windows / fallback: ASCII ----------
     try:
-        columns = min(os.get_terminal_size().columns, 100)
+        # Safe terminal width detection
+        try:
+            columns = min(os.get_terminal_size().columns, 100)
+        except OSError:
+            columns = 80
+        
+        image = ascii_magic.from_image(image_path)
 
-        output = ascii_magic.from_image_file(
-            path,
-            columns=columns,
-            char="#"
-        )
+        output = ascii_magic.to_terminal(image, width=columns)
 
-        # IMPORTANT: Windows needs print(), not to_terminal()
         print(output)
 
     except Exception as e:
         print("[Image failed to load]")
+        print(f"[DEBUG] {e}")
 
 def normalize(text):
     fillers = {"the", "a", "an", "my", "to", "on"}
