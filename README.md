@@ -4,9 +4,13 @@
 
 ## Requirements
 
+### OS
+
+Works currently for Windows 11 and Linux-based operating systems.
+
 ### Software
 
-- Python 3.8 or greater
+- Python >=3.8
 
 ### Packages
 
@@ -14,7 +18,8 @@
 - sys
 - time
 - platform
-- ascii-image-converter (Windows)
+- subprocess (Windows only)
+- ascii-image-converter (Windows only)
 - imgcat (WSL + Linux)
 ---
 #### `ascii-image-converter`

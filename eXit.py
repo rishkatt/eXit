@@ -7,7 +7,6 @@ import platform
 # Import if running in Windows
 if platform.system() == "Windows":
     import subprocess
-    import shutil
 
 # ---------- Terminal Helpers ----------
 
