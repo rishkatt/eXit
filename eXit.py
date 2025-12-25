@@ -14,6 +14,31 @@ def clear():
     else:
         print("\n" * 100)
 
+def show_image(path):
+    system = platform.system()
+
+    # ---------- Linux: try imgcat ----------
+    if system == "Linux":
+        if os.system("command -v imgcat >/dev/null 2>&1") == 0:
+            os.system(f"imgcat {path}")
+            return
+
+    # ---------- Windows / fallback: ASCII ----------
+    try:
+        columns = min(os.get_terminal_size().columns, 100)
+
+        output = ascii_magic.from_image_file(
+            path,
+            columns=columns,
+            char="#"
+        )
+
+        # IMPORTANT: Windows needs print(), not to_terminal()
+        print(output)
+
+    except Exception as e:
+        print("[Image failed to load]")
+
 def normalize(text):
     fillers = {"the", "a", "an", "my", "to", "on"}
     words = text.lower().split()
@@ -89,7 +114,7 @@ BOAT_ART = r"""
 
 def title_screen():
     clear()
-    print(TITLE_ART)
+    show_image("images/exit.png")
     print("Press ENTER to begin")
     input()
 
