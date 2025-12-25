@@ -12,6 +12,7 @@
 
 - os
 - sys
+- time
 
 ## Usage
 
