@@ -11,7 +11,7 @@ if platform.system() == "Windows":
 # ---------- Terminal Helpers ----------
 
 def clear():
-    if platform.system() == "Linux":
+    if platform.system() == "Linux" or platform.system() == "Darwin":
         os.system('clear')
     elif platform.system() == "Windows":
         os.system('cls')
@@ -25,8 +25,8 @@ def show_image(path):
     base_dir = os.path.dirname(os.path.abspath(__file__))
     image_path = os.path.join(base_dir, path)
 
-    # ---------- Linux: try imgcat ----------
-    if system == "Linux":
+    # ---------- Linux or MacOS Terminal: try imgcat ----------
+    if system == "Linux" or system == "Darwin":
         if os.system("command -v imgcat >/dev/null 2>&1") == 0:
             os.system(f"imgcat '{image_path}'")
             return
