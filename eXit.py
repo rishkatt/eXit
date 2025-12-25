@@ -6,8 +6,8 @@ import platform
 
 # Import if running in Windows
 if platform.system() == "Windows":
-    from PIL import Image
-    import ascii_magic
+    import subprocess
+    import shutil
 
 # ---------- Terminal Helpers ----------
 
@@ -34,21 +34,40 @@ def show_image(path):
 
     # ---------- Windows / fallback: ASCII ----------
     try:
-        # Safe terminal width detection
+        # Terminal width detection
         try:
             columns = min(os.get_terminal_size().columns, 100)
         except OSError:
             columns = 80
-        
-        image = ascii_magic.from_image(image_path)
 
-        output = ascii_magic.to_terminal(image, width=columns)
+        # Path to binary (adjust if needed)
+        converter = os.path.join("bin", "ascii-image-converter.exe")
 
-        print(output)
+        if not converter:
+            raise RuntimeError("ascii-image-converter not found in PATH")
+
+        cmd = [
+            converter,
+            image_path,
+            "-W", str(columns),
+            "--color",
+            "--invert"
+        ]
+
+        result = subprocess.run(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=True
+        )
+
+        print(result.stdout)
 
     except Exception as e:
         print("[Image failed to load]")
         print(f"[DEBUG] {e}")
+
 
 def normalize(text):
     fillers = {"the", "a", "an", "my", "to", "on"}

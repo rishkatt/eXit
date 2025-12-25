@@ -17,45 +17,11 @@
 - ascii_magic (Windows)
 - imgcat (WSL + Linux)
 ---
-#### `ascii_magic`
+#### `ascii-image-converter`
 
-For ascii_magic, run this command in Windows:
-```
-pip install pillow ascii_magic
-```
+For Windows, images cannot be displayed onto a terminal. This repository will rely on an [ascii-image-converter solution](https://github.com/TheZoraiz/ascii-image-converter) from another repository. The version that reliably works for this solution will be [v1.13.1](https://github.com/TheZoraiz/ascii-image-converter/releases/tag/v1.13.1). 
 
-For Linux, utilize a virtual environment. Start with running:
-```
-sudo apt install -y python3-venv
-```
-
-This will install venv support. Now, create a virtual environment within the repo. Run:
-```
-python3 -m venv .venv
-```
-
-This creates:
-```
-.venv/
-```
-
-Activate the virtual environment by running:
-```
-source .venv/bin/activate
-```
-
-You should see:
-
-```
-(.venv) $...
-```
-
-before your terminal username.
-
-We can then install pillow and ascii_magic with running:
-```
-pip install pillow ascii_magic
-```
+First, create a `.bin/` directory in the root directory of this repository. Then, download the "amd64_64bit.zip" file into the .bin/ folder. Extract the executable file and place it in the `.bin/` directory. You may delete the remaining contents. 
 
 #### `imgcat`
 
