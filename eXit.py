@@ -4,6 +4,11 @@ import sys
 import time
 import platform
 
+# Import if running in Windows
+if platform.system() == "Windows":
+    import subprocess
+    import shutil
+
 # ---------- Terminal Helpers ----------
 
 def clear():
@@ -13,6 +18,55 @@ def clear():
         os.system('cls')
     else:
         print("\n" * 100)
+
+def show_image(path):
+    system = platform.system()
+
+    # Resolve absolute path safely
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    image_path = os.path.join(base_dir, path)
+
+    # ---------- Linux: try imgcat ----------
+    if system == "Linux":
+        if os.system("command -v imgcat >/dev/null 2>&1") == 0:
+            os.system(f"imgcat '{image_path}'")
+            return
+
+    # ---------- Windows / fallback: ASCII ----------
+    try:
+        # Terminal width detection
+        try:
+            columns = min(os.get_terminal_size().columns, 100)
+        except OSError:
+            columns = 80
+
+        # Path to binary (adjust if needed)
+        converter = os.path.join(".bin", "ascii-image-converter.exe")
+
+        if not converter:
+            raise RuntimeError("ascii-image-converter not found in PATH")
+
+        cmd = [
+            converter,
+            image_path,
+            "-W", str(columns),
+            "--color"
+        ]
+
+        result = subprocess.run(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=True
+        )
+
+        print(result.stdout)
+
+    except Exception as e:
+        print("[Image failed to load]")
+        print(f"[DEBUG] {e}")
+
 
 def normalize(text):
     fillers = {"the", "a", "an", "my", "to", "on"}
@@ -43,67 +97,25 @@ def wait_for_command(valid_commands, invalid_handlers=None):
 
         print("That doesn't work.")
 
-# ---------- ASCII ART ----------
-
-TITLE_ART = r"""
- ███████╗██╗  ██╗██╗████████╗
- ██╔════╝╚██╗██╔╝██║╚══██╔══╝
- █████╗   ╚███╔╝ ██║   ██║
- ██╔══╝   ██╔██╗ ██║   ██║
- ███████╗██╔╝ ██╗██║   ██║
- ╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝
-"""
-
-DUNGEON_ART = r"""
-  ███████████████
-  █             █
-  █   FRIEND    █
-  █     []      █
-  █   BARREL    █
-  █             █
-  ███████████████
-"""
-
-TUNNEL_ART = r"""
-   #########
-  #         #
- #  TUNNEL   #
-  #         #
-   #########
-"""
-
-BEACH_ART = r"""
- ~ ~ ~ ~ ~ ~ ~
-     🌴
- ~ ~ ~ ~ ~ ~ ~
-"""
-
-BOAT_ART = r"""
-      __/___
- _____/______|
- \              \
-  \______________\
-"""
-
 # ---------- Screens ----------
 
 def title_screen():
     clear()
-    print(TITLE_ART)
+    show_image("images/exit.png")
     print("Press ENTER to begin")
     input()
 
 def too_dark():
     clear()
-    print(DUNGEON_ART)
-    print("The room is too dark.")
+    show_image("images/fourth_room_a.png")
+    print("It is too dark to read the note.")
     print("What do you do?\n")
 
 # ---------- Paths ----------
 
 def friend_path():
     clear()
-    print(DUNGEON_ART)
+    show_image("images/second_room_b.png")
     print("Your friend hands you a note.")
     print("What do you do?\n")
 
@@ -113,7 +125,7 @@ def friend_path():
     )
 
     clear()
-    print(DUNGEON_ART)
+    show_image("images/third_room_b.png")
     print('The note says, "Don\'t leave me here."')
     print("Do you leave your friend or stay?\n")
 
@@ -126,7 +138,7 @@ def friend_path():
 
 def first_room():
     clear()
-    print(DUNGEON_ART)
+    show_image("images/first_room.png")
     print("You're trapped in a dungeon with your friend.")
     print("You see a barrel.")
     print("What do you do?\n")
@@ -138,7 +150,7 @@ def first_room():
 
 def second_room():
     clear()
-    print(TUNNEL_ART)
+    show_image("images/second_room_a.png")
     print("The barrel rolls aside and you find a secret tunnel.")
     print("What do you do?\n")
 
@@ -146,7 +158,7 @@ def second_room():
 
 def third_room():
     clear()
-    print(TUNNEL_ART)
+    show_image("images/third_room_a.png")
     print("You start to escape but your friend is too weak to go with you.")
     print("They hand you a note.")
     print("What do you do?\n")
@@ -157,14 +169,14 @@ def third_room():
     )
 
     clear()
-    print(BEACH_ART)
+    show_image("images/fifth_room_a.png")
     print("You crawl through the tunnel and the tunnel leads you to a beach.")
     print("What do you do?\n")
 
     wait_for_command({"look"})
 
     clear()
-    print(BOAT_ART)
+    show_image("images/sixth_room_a.png")
     print("In the water, you see a boat.")
     print("What do you do?\n")
 
@@ -172,7 +184,7 @@ def third_room():
 
 def ending():
     clear()
-    print(BOAT_ART)
+    show_image("images/final_room_a.png")
     print("Congratulations, you're heading to a new world!")
     print("Do you want to play again? (Y/N)\n")
 
