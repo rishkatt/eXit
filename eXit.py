@@ -41,7 +41,7 @@ def show_image(path):
             columns = 80
 
         # Path to binary (adjust if needed)
-        converter = os.path.join("bin", "ascii-image-converter.exe")
+        converter = os.path.join(".bin", "ascii-image-converter.exe")
 
         if not converter:
             raise RuntimeError("ascii-image-converter not found in PATH")
@@ -50,8 +50,7 @@ def show_image(path):
             converter,
             image_path,
             "-W", str(columns),
-            "--color",
-            "--invert"
+            "--color"
         ]
 
         result = subprocess.run(
