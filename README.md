@@ -13,6 +13,7 @@
 - os
 - sys
 - time
+- platform
 
 ## Usage
 
